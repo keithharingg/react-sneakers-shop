@@ -11,32 +11,28 @@ const Header = () => {
           <p className="opacity-5">Best sneakers shop</p>
         </div>
       </div>
-      <ul className="d-flex">
-        <li
-          style={{
-            cursor: 'pointer',
-          }}
-          className="mr-30">
-          <FaShoppingCart />
-          <span className="ml-10">€ 107,50</span>
-        </li>
-        <li
-          style={{
-            cursor: 'pointer',
-          }}
-          className="mr-30">
-          <FaHeart />
-          <span className="ml-10">Bookmarks</span>
-        </li>
-        <li
-          style={{
-            cursor: 'pointer',
-          }}
-          className="mr-30">
-          <FaUserCircle />
-          <span className="ml-10">Profile</span>
-        </li>
-      </ul>
+      <nav>
+        <ul className="d-flex">
+          <li className="mr-30">
+            <a href="/">
+              <FaShoppingCart />
+              <span className="ml-10">€ 107,50</span>
+            </a>
+          </li>
+          <li className="mr-30">
+            <a href="/">
+              <FaHeart />
+              <span className="ml-10">Bookmarks</span>
+            </a>
+          </li>
+          <li className="mr-30">
+            <a href="/">
+              <FaUserCircle />
+              <span className="ml-10">Profile</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
     </>
   );
 };
