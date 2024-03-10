@@ -1,10 +1,69 @@
 import './App.scss';
-import { FaShoppingCart, FaUserCircle, FaHeart } from 'react-icons/fa';
+import { FaShoppingCart, FaUserCircle, FaHeart, FaRegHeart } from 'react-icons/fa';
+import { CgCloseR } from 'react-icons/cg';
+import { BiSolidCheckboxChecked } from 'react-icons/bi';
 import { CiSquarePlus } from 'react-icons/ci';
 
 function App() {
   return (
     <div className="wrapper clear">
+      <div style={{ display: 'none' }} className="drawer-overlay">
+        <div className="drawer">
+          <h2 className="d-flex justify-between">
+            Cart <CgCloseR className="cart-remove" />
+          </h2>
+
+          <div className="cart-items">
+            <div className="cartItem d-flex align-center mb-20">
+              <img
+                className="mr-10"
+                width={150}
+                height={150}
+                src="/img/sneakers/hoka-one-one-kaha-2-low-gtx-scarpe-outdoor-uomo-goblin-blue-1123190-gbhm_A-240x240.jpg"
+                alt="Sneakers"
+              />
+              <div className="mr-10">
+                <p className="sex">Men's sneakers</p>
+                <p className="title">Hoka One One Kaha Low GTX</p>
+                <b>€ 129,99</b>
+              </div>
+              <CgCloseR className="cart-remove" />
+            </div>
+            <div className="cartItem d-flex align-center mb-20">
+              <img
+                className="mr-10"
+                width={150}
+                height={150}
+                src="/img/sneakers/adidas-adizero-prime-x-2-strung-scarpe-running-uomo-ivory-black-id0264_A-240x240.jpg"
+                alt="Sneakers"
+              />
+              <div className="mr-10">
+                <p className="sex">Men's sneakers</p>
+                <p className="title">Adidas Adizero Prime X-2</p>
+                <b>€ 299,99</b>
+              </div>
+              <CgCloseR className="cart-remove" />
+            </div>
+            <div className="cartTotalBlock">
+              <ul>
+                <li>
+                  <span>Total: </span>
+                  <div></div>
+                  <b>€ 430,00</b>
+                </li>
+                <li>
+                  <span>Tax 5%: </span>
+                  <div></div>
+                  <b>€ 21,05</b>
+                </li>
+              </ul>
+              <button className="greenButton">
+                Checkout <img src="/img/arrow.svg" alt="Arrow" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
       <header className="d-flex justify-between align-center p-40">
         <div className="d-flex align-center">
           <img width={40} height={40} src="/img/logo.png" alt="" />
@@ -42,9 +101,19 @@ function App() {
       </header>
       <main>
         <div className="content p-40">
-          <h1 className="mb-40">All sneakers</h1>
+          <div className="d-flex justify-between align-center mb-40">
+            <h1>All sneakers</h1>
+            <div className="search-block d-flex">
+              <img src="/img/search.svg" alt="Search" />
+              <input placeholder="Search..." type="text" />
+            </div>
+          </div>
           <div className="d-flex justify-between">
             <div className="card">
+              <div className="favorite">
+                <FaRegHeart className="liked" />
+              </div>
+              {/* <FaHeart /> */}
               <img
                 width={220}
                 height={220}
@@ -57,17 +126,21 @@ function App() {
                   <span>Price: </span>
                   <b>€ 299,99</b>
                 </div>
-                <CiSquarePlus
+                {/* <BiSolidCheckboxChecked
                   style={{
-                    width: '40px',
-                    height: '40px',
+                    width: '50px',
+                    height: '50px',
                     cursor: 'pointer',
                     opacity: 0.5,
                   }}
-                />
+                /> */}
+                <CiSquarePlus className="plus" />
               </div>
             </div>
             <div className="card">
+              <div className="favorite">
+                <FaRegHeart className="liked" />
+              </div>
               <img
                 width={220}
                 height={220}
@@ -80,17 +153,13 @@ function App() {
                   <span>Price: </span>
                   <b>€ 129,99</b>
                 </div>
-                <CiSquarePlus
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    cursor: 'pointer',
-                    opacity: 0.5,
-                  }}
-                />
+                <CiSquarePlus className="plus" />
               </div>
             </div>
             <div className="card">
+              <div className="favorite">
+                <FaRegHeart className="liked" />
+              </div>
               <img
                 width={220}
                 height={220}
@@ -103,17 +172,13 @@ function App() {
                   <span>Price: </span>
                   <b>€ 159,99</b>
                 </div>
-                <CiSquarePlus
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    cursor: 'pointer',
-                    opacity: 0.5,
-                  }}
-                />
+                <CiSquarePlus className="plus" />
               </div>
             </div>
             <div className="card">
+              <div className="favorite">
+                <FaRegHeart className="liked" />
+              </div>
               <img
                 width={220}
                 height={220}
@@ -126,14 +191,7 @@ function App() {
                   <span>Price: </span>
                   <b>€ 69,99</b>
                 </div>
-                <CiSquarePlus
-                  style={{
-                    width: '40px',
-                    height: '40px',
-                    cursor: 'pointer',
-                    opacity: 0.5,
-                  }}
-                />
+                <CiSquarePlus className="plus" />
               </div>
             </div>
           </div>
