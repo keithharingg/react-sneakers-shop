@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 import { CiSquarePlus } from 'react-icons/ci';
 import { FaRegHeart } from 'react-icons/fa';
+import { FcLike } from 'react-icons/fc';
 import styles from './Card.module.scss';
-import { BiSolidCheckboxChecked } from 'react-icons/bi';
 
-const Card = ({ title, price, img, onFavorite }) => {
+const Card = ({ title, price, img, id, onAddToCart }) => {
   const [isAdded, setIsAdded] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   const onClickPlusToggle = () => {
+    onAddToCart({ title, price, img, id });
     setIsAdded(!isAdded);
+  };
+
+  const onClickLikeToggle = () => {
+    setIsLiked(!isLiked);
   };
   return (
     <>
       <div className={styles.card}>
         <div className={styles.favorite}>
-          <FaRegHeart onClick={onFavorite} className={styles.liked} />
+          {isLiked ? (
+            <FcLike className={styles.isLiked} onClick={onClickLikeToggle} />
+          ) : (
+            <FaRegHeart onClick={onClickLikeToggle} className={styles.like} />
+          )}
         </div>
         {/* <FaHeart /> */}
         <img width={220} height={220} src={img} alt="Sneakers" />
@@ -24,11 +34,7 @@ const Card = ({ title, price, img, onFavorite }) => {
             <span>Price: </span>
             <b>€ {price}</b>
           </div>
-          {isAdded ? (
-            <BiSolidCheckboxChecked onClick={onClickPlusToggle} className={styles.plusChecked} />
-          ) : (
-            <CiSquarePlus onClick={onClickPlusToggle} className={styles.plus} />
-          )}
+          <CiSquarePlus onClick={onClickPlusToggle} className={styles.plus} />
         </div>
       </div>
     </>

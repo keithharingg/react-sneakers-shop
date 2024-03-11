@@ -1,28 +1,24 @@
 import React from 'react';
 import { CgCloseR } from 'react-icons/cg';
 
-const Drawer = ({ onClose }) => {
+const Drawer = ({ onClose, items = [], onRemove }) => {
   return (
     <div className="drawer-overlay">
       <div className="drawer">
         <h2 className="d-flex justify-between">
           Cart <CgCloseR onClick={onClose} className="cart-remove" />
         </h2>
-        <div className="cartItem d-flex align-center mb-20">
-          <img
-            className="mr-10"
-            width={150}
-            height={150}
-            src="/img/sneakers/hoka-one-one-kaha-2-low-gtx-scarpe-outdoor-uomo-goblin-blue-1123190-gbhm_A-240x240.jpg"
-            alt="Sneakers"
-          />
-          <div className="mr-10">
-            <p className="sex">Men's sneakers</p>
-            <p className="title">Hoka One One Kaha Low GTX</p>
-            <b>€ 129,99</b>
+        {items.map((item) => (
+          <div key={item.id} className="cartItem d-flex align-center mb-20">
+            <img className="mr-10" width={150} height={150} src={item.img} alt="Sneakers" />
+            <div className="mr-10">
+              <p className="sex">Men's sneakers</p>
+              <p className="title">{item.title}</p>
+              <b>€ {item.price}</b>
+            </div>
+            <CgCloseR onClick={() => onRemove(item.id)} className="cart-remove" />
           </div>
-          <CgCloseR className="cart-remove" />
-        </div>
+        ))}
         <div className="cart-items">
           <div className="cartTotalBlock">
             <ul>
