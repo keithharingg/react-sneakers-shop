@@ -14,7 +14,13 @@ const SneakersList = () => {
       </div>
       <div className="d-flex justify-between">
         {sneakers.map((s, i) => (
-          <Card key={i} title={s.title} price={s.price} img={s.img} />
+          <Card
+            key={i}
+            title={s.title}
+            price={s.price}
+            img={s.img}
+            onFavorite={() => console.log('Added to bookmarks')}
+          />
         ))}
       </div>
     </div>

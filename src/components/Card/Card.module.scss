@@ -26,6 +26,21 @@ span {
   text-transform: uppercase;
 }
 
+.plusChecked {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: color 0.3s ease;
+
+  color: #fca510; // Change color when checked
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #fca510; // Change color when checked and hovered
+  }
+}
+
 .plus {
   width: 40px;
   height: 40px;
@@ -34,9 +49,6 @@ span {
   transition: color 0.3s ease;
 
   &:hover {
-    color: #fca510;
-  }
-  &:active {
     color: #fca510;
   }
 }

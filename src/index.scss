@@ -183,6 +183,10 @@ input {
     li {
       display: flex;
       align-items: flex-end;
+      span {
+        margin-top: 10px;
+        margin-bottom: 0;
+      }
     }
 
     div {

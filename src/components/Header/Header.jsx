@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaHeart, FaShoppingCart, FaUserCircle } from 'react-icons/fa';
 
-const Header = () => {
+const Header = ({ onClickCart }) => {
   return (
     <>
       <div className="d-flex align-center">
@@ -13,7 +13,7 @@ const Header = () => {
       </div>
       <nav>
         <ul className="d-flex">
-          <li className="mr-30">
+          <li onClick={onClickCart} className="mr-30">
             <a href="/">
               <FaShoppingCart />
               <span className="ml-10">€ 107,50</span>
