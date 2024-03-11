@@ -1,12 +1,12 @@
 import React from 'react';
 import { CgCloseR } from 'react-icons/cg';
 
-const Drawer = ({ onCloseCart }) => {
+const Drawer = ({ onClose }) => {
   return (
     <div className="drawer-overlay">
       <div className="drawer">
         <h2 className="d-flex justify-between">
-          Cart <CgCloseR className="cart-remove" />
+          Cart <CgCloseR onClick={onClose} className="cart-remove" />
         </h2>
         <div className="cartItem d-flex align-center mb-20">
           <img
@@ -21,7 +21,7 @@ const Drawer = ({ onCloseCart }) => {
             <p className="title">Hoka One One Kaha Low GTX</p>
             <b>€ 129,99</b>
           </div>
-          <CgCloseR onClick={onCloseCart} className="cart-remove" />
+          <CgCloseR className="cart-remove" />
         </div>
         <div className="cart-items">
           <div className="cartTotalBlock">

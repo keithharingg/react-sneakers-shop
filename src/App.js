@@ -8,7 +8,7 @@ function App() {
   const [cartOpened, setCartOpened] = useState(false);
   return (
     <div className="wrapper clear">
-      {cartOpened ? <Drawer onCloseCart={() => setCartOpened(false)} /> : undefined}
+      {cartOpened && <Drawer onClose={() => setCartOpened(false)} />}
       <header className="d-flex justify-between align-center p-40">
         <Header onClickCart={() => setCartOpened(true)} />
       </header>

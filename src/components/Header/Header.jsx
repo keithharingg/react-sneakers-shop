@@ -11,28 +11,25 @@ const Header = ({ onClickCart }) => {
           <p className="opacity-5">Best sneakers shop</p>
         </div>
       </div>
-      <nav>
-        <ul className="d-flex">
-          <li onClick={onClickCart} className="mr-30">
-            <a href="/">
-              <FaShoppingCart />
-              <span className="ml-10">€ 107,50</span>
-            </a>
-          </li>
-          <li className="mr-30">
-            <a href="/">
-              <FaHeart />
-              <span className="ml-10">Bookmarks</span>
-            </a>
-          </li>
-          <li className="mr-30">
-            <a href="/">
-              <FaUserCircle />
-              <span className="ml-10">Profile</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
+
+      <ul className="d-flex">
+        <li onClick={onClickCart} className="mr-30">
+          <FaShoppingCart />
+          <span className="ml-10">€ 107,50</span>
+        </li>
+        <li className="mr-30">
+          <a href="/">
+            <FaHeart />
+            <span className="ml-10">Bookmarks</span>
+          </a>
+        </li>
+        <li className="mr-30">
+          <a href="/">
+            <FaUserCircle />
+            <span className="ml-10">Profile</span>
+          </a>
+        </li>
+      </ul>
     </>
   );
 };

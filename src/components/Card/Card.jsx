@@ -10,7 +10,6 @@ const Card = ({ title, price, img, onFavorite }) => {
   const onClickPlusToggle = () => {
     setIsAdded(!isAdded);
   };
-  console.log(isAdded);
   return (
     <>
       <div className={styles.card}>
