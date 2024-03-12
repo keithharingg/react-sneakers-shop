@@ -4,7 +4,7 @@ import { FaRegHeart } from 'react-icons/fa';
 import { FcLike } from 'react-icons/fc';
 import styles from './Card.module.scss';
 
-const Card = ({ title, price, img, id, onAddToCart }) => {
+const Card = ({ title, price, img, id, onAddToCart, onAddToFavorites }) => {
   const [isAdded, setIsAdded] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -14,6 +14,7 @@ const Card = ({ title, price, img, id, onAddToCart }) => {
   };
 
   const onClickLikeToggle = () => {
+    onAddToFavorites({ title, price, img, id });
     setIsLiked(!isLiked);
   };
   return (

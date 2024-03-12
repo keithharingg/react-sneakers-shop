@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 import Card from '../Card/Card';
 
-const SneakersList = ({ sneakersData, onAddToCart }) => {
+const SneakersList = ({ sneakersData, onAddToCart, onAddToFavorites }) => {
   const [searchValue, setSearchValue] = useState('');
 
   const onInputChange = (e) => {
@@ -30,7 +30,7 @@ const SneakersList = ({ sneakersData, onAddToCart }) => {
               price={s.price}
               img={s.img}
               onAddToCart={(obj) => onAddToCart(obj)}
-              onFavorite={() => console.log('Added to bookmarks')}
+              onAddToFavorites={(obj) => onAddToFavorites(obj)}
             />
           ))}
       </div>
