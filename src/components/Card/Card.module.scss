@@ -27,21 +27,6 @@ span {
   text-transform: uppercase;
 }
 
-.plusChecked {
-  width: 45px;
-  height: 45px;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: color 0.3s ease;
-
-  color: #fca510; // Change color when checked
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #fca510; // Change color when checked and hovered
-  }
-}
-
 .plus {
   width: 35px;
   height: 35px;
