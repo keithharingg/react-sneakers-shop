@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 //import AppContext from '../context';
 
 const Info = ({ title, image, description }) => {
@@ -9,10 +10,12 @@ const Info = ({ title, image, description }) => {
       <img className="mb-20" width="120px" src={image} alt="Empty" />
       <h2>{title}</h2>
       <p className="opacity-6">{description}</p>
-      <button className="greenButton">
-        <img src="img/arrow.svg" alt="Arrow" />
-        Back
-      </button>
+      <Link to="/">
+        <button className="greenButton">
+          <img src="img/arrow.svg" alt="Arrow" />
+          Back
+        </button>
+      </Link>
     </div>
   );
 };

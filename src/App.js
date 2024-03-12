@@ -27,12 +27,19 @@ function App() {
   }, []);
 
   const onAddToCart = (obj) => {
-    setCartItems((prev) => [...prev, obj]);
+    if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      setCartItems((prev) => prev.filter((item) => Number(item.id) !== Number(obj.id)));
+    } else {
+      setCartItems((prev) => [...prev, obj]);
+    }
   };
 
   const onAddToFavorites = (obj) => {
-    setFavoriteItems((prev) => [...prev, obj]);
-    console.log(obj);
+    if (favoriteItems.find((item) => item.id === obj.id)) {
+      setFavoriteItems((prev) => prev.filter((item) => item.id !== obj.id));
+    } else {
+      setFavoriteItems((prev) => [...prev, obj]);
+    }
   };
 
   const onRemoveItemFromCart = (id) => {
@@ -45,13 +52,25 @@ function App() {
         <Route
           path="/cart"
           element={
-            cartOpened && (
-              <Drawer
-                onRemove={onRemoveItemFromCart}
-                items={cartItems}
-                onClose={() => setCartOpened(false)}
-              />
-            )
+            <>
+              <header className="d-flex justify-between align-center p-40">
+                <Header onClickCart={() => setCartOpened(true)} />
+              </header>
+              <main>
+                <SneakersList
+                  onAddToFavorites={onAddToFavorites}
+                  onAddToCart={onAddToCart}
+                  sneakersData={sneakersData}
+                />
+              </main>
+              {cartOpened && (
+                <Drawer
+                  onRemove={onRemoveItemFromCart}
+                  items={cartItems}
+                  onClose={() => setCartOpened(false)}
+                />
+              )}
+            </>
           }
         />
         <Route
@@ -63,6 +82,7 @@ function App() {
               </header>
               <main>
                 <SneakersList
+                  cartItems={cartItems}
                   onAddToFavorites={onAddToFavorites}
                   onAddToCart={onAddToCart}
                   sneakersData={sneakersData}
@@ -78,7 +98,7 @@ function App() {
               <header className="d-flex justify-between align-center p-40">
                 <Header onClickCart={() => setCartOpened(true)} />
               </header>
-              <Favorites favoriteItems={favoriteItems} />
+              <Favorites onAddToFavorites={onAddToFavorites} favoriteItems={favoriteItems} />
             </>
           }
         />

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 import Card from '../Card/Card';
 
-const SneakersList = ({ sneakersData, onAddToCart, onAddToFavorites }) => {
+const SneakersList = ({ sneakersData, onAddToCart, onAddToFavorites, cartItems }) => {
   const [searchValue, setSearchValue] = useState('');
 
   const onInputChange = (e) => {
@@ -21,14 +21,11 @@ const SneakersList = ({ sneakersData, onAddToCart, onAddToFavorites }) => {
       </div>
       <div className="d-flex flex-wrap">
         {sneakersData
-          .filter((s) => s.title.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((s) => (
+          .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
+          .map((item) => (
             <Card
-              id={s.id}
-              key={s.id}
-              title={s.title}
-              price={s.price}
-              img={s.img}
+              {...item}
+              added
               onAddToCart={(obj) => onAddToCart(obj)}
               onAddToFavorites={(obj) => onAddToFavorites(obj)}
             />

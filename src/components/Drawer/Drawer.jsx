@@ -1,16 +1,23 @@
 import React from 'react';
 import { CgCloseR } from 'react-icons/cg';
 import Info from '../Info/Info';
+import { useNavigate } from 'react-router-dom';
 
 const Drawer = ({ onClose, items = [], onRemove }) => {
   const [orderId, setOrderId] = React.useState(null);
   const [isOrderComplete, setIsOrderComplete] = React.useState(false);
 
+  const navigate = useNavigate();
+  const handleClose = () => {
+    onClose(); // Close the cart
+    navigate('/');
+  };
+
   return (
     <div className="drawer-overlay">
       <div className="drawer">
         <h2 className="d-flex justify-between">
-          Cart <CgCloseR onClick={onClose} className="cart-remove" />
+          Cart <CgCloseR onClick={handleClose} className="cart-remove" />
         </h2>
 
         {items.length > 0 ? (

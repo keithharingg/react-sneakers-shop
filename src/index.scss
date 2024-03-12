@@ -174,21 +174,6 @@ input {
   }
 }
 
-.plus {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  opacity: 0.5;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #fca510;
-  }
-  &:active {
-    color: #fca510;
-  }
-}
-
 .liked {
   width: 25px;
   height: 25px;
