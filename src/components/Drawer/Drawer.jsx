@@ -30,7 +30,7 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
                   <p className="title">{item.title}</p>
                   <b>€ {item.price}</b>
                 </div>
-                <CgCloseR onClick={() => onRemove(item.id)} className="cart-remove" />
+                <CgCloseR onClick={() => onRemove(item.title)} className="cart-remove" />
               </div>
             ))}
             <div className="cart-items">

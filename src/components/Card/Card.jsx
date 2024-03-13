@@ -12,12 +12,12 @@ const Card = ({
   id,
   onAddToCart,
   onAddToFavorites,
-  favoriteCheck = false,
   added = false,
+  liked = false,
   loading,
 }) => {
   const [isAdded, setIsAdded] = useState(added);
-  const [isLiked, setIsLiked] = useState(favoriteCheck);
+  const [isLiked, setIsLiked] = useState(liked);
 
   const onClickPlusToggle = () => {
     onAddToCart({ title, price, img, id });
@@ -28,6 +28,7 @@ const Card = ({
     onAddToFavorites({ title, price, img, id });
     setIsLiked(!isLiked);
   };
+
   return (
     <>
       <div className={styles.card}>
@@ -36,7 +37,7 @@ const Card = ({
         ) : (
           <>
             <div className={styles.favorite}>
-              {isLiked ? (
+              {liked ? (
                 <FcLike className={styles.isLiked} onClick={onClickLikeToggle} />
               ) : (
                 <FaRegHeart onClick={onClickLikeToggle} className={styles.like} />

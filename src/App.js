@@ -2,10 +2,12 @@ import './App.scss';
 import Header from './components/Header/Header';
 import Drawer from './components/Drawer/Drawer';
 import SneakersList from './components/SneakersList/SneakersList';
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Route, Routes } from 'react-router-dom';
 import Favorites from './components/Favorites/Favorites';
+
+export const AppContext = createContext({});
 
 function App() {
   const [cartOpened, setCartOpened] = useState(false);
@@ -39,77 +41,79 @@ function App() {
   };
 
   const onAddToFavorites = (obj) => {
-    if (favoriteItems.find((item) => item.id === obj.id)) {
-      setFavoriteItems((prev) => prev.filter((item) => item.id !== obj.id));
+    if (favoriteItems.find((item) => item.title === obj.title)) {
+      setFavoriteItems((prev) => prev.filter((item) => item.title !== obj.title));
     } else {
       setFavoriteItems((prev) => [...prev, obj]);
     }
   };
 
-  const onRemoveItemFromCart = (id) => {
-    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  const onRemoveItemFromCart = (title) => {
+    setCartItems((prev) => prev.filter((item) => item.title !== title));
   };
 
   return (
-    <div className="wrapper clear">
-      <Routes>
-        <Route
-          path="/cart"
-          element={
-            <>
-              <header className="d-flex justify-between align-center p-40">
-                <Header onClickCart={() => setCartOpened(true)} />
-              </header>
-              <main>
-                <SneakersList
-                  onAddToFavorites={onAddToFavorites}
-                  onAddToCart={onAddToCart}
-                  sneakersData={sneakersData}
-                />
-              </main>
-              {cartOpened && (
-                <Drawer
-                  onRemove={onRemoveItemFromCart}
-                  items={cartItems}
-                  onClose={() => setCartOpened(false)}
-                />
-              )}
-            </>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <>
-              <header className="d-flex justify-between align-center p-40">
-                <Header onClickCart={() => setCartOpened(true)} />
-              </header>
+    <AppContext.Provider value={{ cartItems, sneakersData, favoriteItems }}>
+      <div className="wrapper clear">
+        <Routes>
+          <Route
+            path="/cart"
+            element={
+              <>
+                <header className="d-flex justify-between align-center p-40">
+                  <Header onClickCart={() => setCartOpened(true)} />
+                </header>
+                <main>
+                  <SneakersList
+                    onAddToFavorites={onAddToFavorites}
+                    onAddToCart={onAddToCart}
+                    sneakersData={sneakersData}
+                  />
+                </main>
+                {cartOpened && (
+                  <Drawer
+                    onRemove={onRemoveItemFromCart}
+                    items={cartItems}
+                    onClose={() => setCartOpened(false)}
+                  />
+                )}
+              </>
+            }
+          />
+          <Route
+            path="/"
+            element={
+              <>
+                <header className="d-flex justify-between align-center p-40">
+                  <Header onClickCart={() => setCartOpened(true)} />
+                </header>
 
-              <main>
-                <SneakersList
-                  isLoading={isLoading}
-                  cartItems={cartItems}
-                  onAddToFavorites={onAddToFavorites}
-                  onAddToCart={onAddToCart}
-                  sneakersData={sneakersData}
-                />
-              </main>
-            </>
-          }
-        />
-        <Route
-          path="/favorites"
-          element={
-            <>
-              <header className="d-flex justify-between align-center p-40">
-                <Header onClickCart={() => setCartOpened(true)} />
-              </header>
-              <Favorites onAddToFavorites={onAddToFavorites} favoriteItems={favoriteItems} />
-            </>
-          }
-        />
-      </Routes>
-    </div>
+                <main>
+                  <SneakersList
+                    isLoading={isLoading}
+                    cartItems={cartItems}
+                    onAddToFavorites={onAddToFavorites}
+                    onAddToCart={onAddToCart}
+                    sneakersData={sneakersData}
+                  />
+                </main>
+              </>
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <>
+                <header className="d-flex justify-between align-center p-40">
+                  <Header onClickCart={() => setCartOpened(true)} />
+                </header>
+                <Favorites onAddToFavorites={onAddToFavorites} />
+              </>
+            }
+          />
+        </Routes>
+      </div>
+    </AppContext.Provider>
   );
 }
 

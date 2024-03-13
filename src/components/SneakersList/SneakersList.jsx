@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { IoIosClose } from 'react-icons/io';
 import Card from '../Card/Card';
+import { AppContext } from '../../App';
 
 const SneakersList = ({ sneakersData, onAddToCart, onAddToFavorites, isLoading }) => {
   const [searchValue, setSearchValue] = useState('');
+  const { cartItems, favoriteItems } = useContext(AppContext);
 
   const onInputChange = (e) => {
     setSearchValue(e.target.value);
@@ -17,8 +19,9 @@ const SneakersList = ({ sneakersData, onAddToCart, onAddToFavorites, isLoading }
       <Card
         key={index}
         {...item}
+        added={cartItems.some((obj) => obj.id === item.id)}
+        liked={favoriteItems.some((obj) => obj.id === item.id)}
         loading={isLoading}
-        added
         onAddToCart={(obj) => onAddToCart(obj)}
         onAddToFavorites={(obj) => onAddToFavorites(obj)}
       />
