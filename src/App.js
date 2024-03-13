@@ -53,7 +53,8 @@ function App() {
   };
 
   return (
-    <AppContext.Provider value={{ cartItems, sneakersData, favoriteItems }}>
+    <AppContext.Provider
+      value={{ cartItems, sneakersData, favoriteItems, setCartOpened, setCartItems }}>
       <div className="wrapper clear">
         <Routes>
           <Route
