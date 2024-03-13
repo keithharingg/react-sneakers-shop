@@ -9,6 +9,7 @@ import Favorites from './components/Favorites/Favorites';
 
 function App() {
   const [cartOpened, setCartOpened] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [cartItems, setCartItems] = useState([]);
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [sneakersData, setSneakersData] = useState([]);
@@ -16,10 +17,13 @@ function App() {
   useEffect(() => {
     const getSneakers = async () => {
       try {
+        setIsLoading(true);
         const res = await axios.get('https://65a17f98600f49256fb1bfc5.mockapi.io/sneakers');
         setSneakersData(res.data);
+        setIsLoading(false);
       } catch (error) {
-        console.error(error);
+        console.error('Error fetching data', error);
+        setIsLoading(false);
       }
     };
 
@@ -80,8 +84,10 @@ function App() {
               <header className="d-flex justify-between align-center p-40">
                 <Header onClickCart={() => setCartOpened(true)} />
               </header>
+
               <main>
                 <SneakersList
+                  isLoading={isLoading}
                   cartItems={cartItems}
                   onAddToFavorites={onAddToFavorites}
                   onAddToCart={onAddToCart}
