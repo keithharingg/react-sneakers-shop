@@ -33,7 +33,7 @@ const SneakersList = ({ sneakersData, onAddToCart, onAddToFavorites, isLoading }
       <div className="d-flex justify-between align-center mb-40">
         <h1>{searchValue ? `Search by: "${searchValue}"` : 'All sneakers'}</h1>
         <div className="search-block d-flex">
-          <img src="/img/search.svg" alt="Search" />
+          <img src="img/search.svg" alt="Search" />
           <input onChange={onInputChange} value={searchValue} placeholder="Search..." type="text" />
           {searchValue && <IoIosClose className="clearSearch" onClick={() => setSearchValue('')} />}
         </div>

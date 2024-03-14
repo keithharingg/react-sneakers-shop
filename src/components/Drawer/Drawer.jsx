@@ -64,7 +64,7 @@ const Drawer = ({ onClose, items = [], onRemove, updateOrders, opened }) => {
                 </li>
               </ul>
               <button onClick={onClickOrder} className="greenButton">
-                Checkout <img src="/img/arrow.svg" alt="Arrow" />
+                Checkout <img src="img/arrow.svg" alt="Arrow" />
               </button>
             </div>
           </>
