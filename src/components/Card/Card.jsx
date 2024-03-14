@@ -36,25 +36,28 @@ const Card = ({
           <SneakersSkeleton />
         ) : (
           <>
-            <div className={styles.favorite}>
-              {liked ? (
-                <FcLike className={styles.isLiked} onClick={onClickLikeToggle} />
-              ) : (
-                <FaRegHeart onClick={onClickLikeToggle} className={styles.like} />
-              )}
-            </div>
+            {onAddToFavorites && (
+              <div className={styles.favorite}>
+                {liked ? (
+                  <FcLike className={styles.isLiked} onClick={onClickLikeToggle} />
+                ) : (
+                  <FaRegHeart onClick={onClickLikeToggle} className={styles.like} />
+                )}
+              </div>
+            )}
             <img width={220} height={220} src={img} alt="Sneakers" />
             <h5>Men's sneakers {title}</h5>
             <div className="d-flex justify-between align-center">
               <div className="d-flex flex-column">
                 <span>Price: </span>
-                <b>€ {price}</b>
+                <b>€ {price},00</b>
               </div>
-
-              <MdShoppingCartCheckout
-                onClick={onClickPlusToggle}
-                className={added ? styles.plusActive : styles.plus}
-              />
+              {onAddToCart && (
+                <MdShoppingCartCheckout
+                  onClick={onClickPlusToggle}
+                  className={added ? styles.plusActive : styles.plus}
+                />
+              )}
             </div>
           </>
         )}

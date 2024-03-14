@@ -1,10 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { CgCloseR } from 'react-icons/cg';
-import Info from '../Info/Info';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../../App';
+import Info from '../Info/Info';
+import styles from './Drawer.module.scss';
 
-const Drawer = ({ onClose, items = [], onRemove }) => {
+const Drawer = ({ onClose, items = [], onRemove, updateOrders, opened }) => {
   const [orderId, setOrderId] = useState(null);
   const [isOrderComplete, setIsOrderComplete] = useState(false);
   const { setCartItems } = useContext(AppContext);
@@ -12,6 +13,7 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
   const onClickOrder = () => {
     setOrderId(Math.floor(Math.random() * 10));
     setIsOrderComplete(true);
+    updateOrders(items);
     setCartItems([]);
   };
 
@@ -21,9 +23,11 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
     navigate('/');
   };
 
+  const toCartPrice = items.reduce((sum, item) => item.price + sum, 0);
+
   return (
-    <div className="drawer-overlay">
-      <div className="drawer">
+    <div className={`${styles.overlay} ${opened ? styles.overlayVisible : ''}`}>
+      <div className={styles.drawer}>
         <h2 className="d-flex justify-between">
           Cart <CgCloseR onClick={handleClose} className="cart-remove" />
         </h2>
@@ -31,16 +35,16 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
         {items.length > 0 ? (
           <>
             <div className="d-flex flex-column flex">
-              <div className="cart-items">
+              <div className="cart-items flex">
                 {items.map((item) => (
-                  <div key={item.id} className="cartItem d-flex align-center mb-20">
+                  <div key={item.id} className={styles.cartItem}>
                     <img className="mr-10" width={150} height={150} src={item.img} alt="Sneakers" />
                     <div className="mr-10">
                       <p className="sex">Men's sneakers</p>
                       <p className="title">{item.title}</p>
                       <b>€ {item.price}</b>
                     </div>
-                    <CgCloseR onClick={() => onRemove(item.title)} className="cart-remove" />
+                    <CgCloseR onClick={() => onRemove(item.title)} className={styles.cartRemove} />
                   </div>
                 ))}
               </div>
@@ -51,12 +55,12 @@ const Drawer = ({ onClose, items = [], onRemove }) => {
                 <li>
                   <span>Total: </span>
                   <div></div>
-                  <b>€ 430,00</b>
+                  <b>€ {toCartPrice},00</b>
                 </li>
                 <li>
                   <span>Tax 5%: </span>
                   <div></div>
-                  <b>€ 21,05</b>
+                  <b>€ {Math.floor((toCartPrice / 100) * 5)},00</b>
                 </li>
               </ul>
               <button onClick={onClickOrder} className="greenButton">

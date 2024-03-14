@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaHeart, FaShoppingCart, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../../App';
 
 const Header = ({ onClickCart }) => {
+  const { cartItems } = useContext(AppContext);
+
+  const toCartPrice = cartItems.reduce((sum, item) => item.price + sum, 0);
   return (
     <>
       <Link to="/">
@@ -19,7 +23,7 @@ const Header = ({ onClickCart }) => {
         <li onClick={onClickCart} className="mr-30">
           <Link to="/cart">
             <FaShoppingCart />
-            <span className="ml-10">€ 107,50</span>
+            <span className="ml-10">€ {toCartPrice},00</span>
           </Link>
         </li>
         <li className="mr-30">
@@ -29,9 +33,9 @@ const Header = ({ onClickCart }) => {
           </Link>
         </li>
         <li className="mr-30">
-          <Link to="/profile">
+          <Link to="/orders">
             <FaUserCircle />
-            <span className="ml-10">Profile</span>
+            <span className="ml-10">Orders</span>
           </Link>
         </li>
       </ul>

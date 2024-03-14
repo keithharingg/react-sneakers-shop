@@ -1,11 +1,12 @@
-import './App.scss';
+import { createContext, useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 import Header from './components/Header/Header';
 import Drawer from './components/Drawer/Drawer';
 import SneakersList from './components/SneakersList/SneakersList';
-import { createContext, useEffect, useState } from 'react';
-import axios from 'axios';
-import { Route, Routes } from 'react-router-dom';
 import Favorites from './components/Favorites/Favorites';
+import Orders from './components/Orders/Orders';
+import './App.scss';
 
 export const AppContext = createContext({});
 
@@ -15,6 +16,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [favoriteItems, setFavoriteItems] = useState([]);
   const [sneakersData, setSneakersData] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const getSneakers = async () => {
@@ -52,9 +54,22 @@ function App() {
     setCartItems((prev) => prev.filter((item) => item.title !== title));
   };
 
+  const updateOrders = (items) => {
+    setOrders(items);
+  };
+
   return (
     <AppContext.Provider
-      value={{ cartItems, sneakersData, favoriteItems, setCartOpened, setCartItems }}>
+      value={{
+        onAddToFavorites,
+        onAddToCart,
+        cartItems,
+        sneakersData,
+        favoriteItems,
+        setCartOpened,
+        setCartItems,
+        orders,
+      }}>
       <div className="wrapper clear">
         <Routes>
           <Route
@@ -71,13 +86,13 @@ function App() {
                     sneakersData={sneakersData}
                   />
                 </main>
-                {cartOpened && (
-                  <Drawer
-                    onRemove={onRemoveItemFromCart}
-                    items={cartItems}
-                    onClose={() => setCartOpened(false)}
-                  />
-                )}
+                <Drawer
+                  opened={cartOpened}
+                  updateOrders={updateOrders}
+                  onRemove={onRemoveItemFromCart}
+                  items={cartItems}
+                  onClose={() => setCartOpened(false)}
+                />
               </>
             }
           />
@@ -108,7 +123,18 @@ function App() {
                 <header className="d-flex justify-between align-center p-40">
                   <Header onClickCart={() => setCartOpened(true)} />
                 </header>
-                <Favorites onAddToFavorites={onAddToFavorites} />
+                <Favorites />
+              </>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <>
+                <header className="d-flex justify-between align-center p-40">
+                  <Header onClickCart={() => setCartOpened(true)} />
+                </header>
+                <Orders orders={orders} />
               </>
             }
           />
